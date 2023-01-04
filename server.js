@@ -46,7 +46,6 @@ const {
   loginUser,
   getUser,
   editUser,
-  sendRecoverPassword,
   editPassword,
 } = require("./controllers/users");
 
@@ -62,15 +61,12 @@ app.get("/users/:idUser", isAuth, getUser);
 // Editar el email o el avatar de usuario.
 app.put("/users", isAuth, editUser);
 
-// Enviar un email de recuperación de contraseña.
-app.post("/users/password/recover", sendRecoverPassword);
-
 // Editamos la contraseña de un usuario con un código de recuperación.
 app.put("/users/password", editPassword);
 
 /**
  * ##########################
- * ## Middlewares entradas ##
+ * ## Middlewares exercises ##
  * ##########################
  */
 
