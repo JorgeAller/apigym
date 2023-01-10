@@ -157,3 +157,11 @@ Implementaremos esta validación de datos, para comprobar que esa información q
 - Igual que buscamos un ejercicio con keywords, tiene más sentido hacer un endpoint de busqueda de usuarios o buscar con keywords los usuarios
 - Para eliminar un ejercicio o rutina es igual que con los usuarios o hay que hacer algo diferente✅
 - Es mejor tener los endpoints de las reacciones en rutas diferentes o directamente en la del contenido (/likes/:idExercise o /exercises/:idExercise/likes)✅
+
+Made by:
+
+Jorge Aller Taboada
+José Manuel Eyo Ortega
+HACKABOSS JSB14CO
+
+
