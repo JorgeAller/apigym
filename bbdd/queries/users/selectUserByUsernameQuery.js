@@ -9,7 +9,7 @@ const selectUserByUsernameQuery = async (username) => {
     connection = await getConnection();
 
     const [users] = await connection.query(
-      `SELECT id, email, password, role FROM users WHERE username = ?`,
+      `SELECT id, username, avatar, email, password, role, createdAt FROM users WHERE username = ?`,
       [username]
     );
 

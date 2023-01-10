@@ -1,13 +1,15 @@
 const newUser = require("./newUser");
 const loginUser = require("./loginUser");
-const getUser = require("./getUser");
+const getUserById = require("./getUserById");
+const getUserByUsername = require("./getUserByUsername");
 const editUser = require("./editUser");
-const editPassword = require("./editPassword");
+const deleteOwnUser = require("./deleteOwnUser");
 
 module.exports = {
   newUser,
   loginUser,
-  getUser,
+  getUserById,
+  getUserByUsername,
   editUser,
-  editPassword,
+  deleteOwnUser,
 };

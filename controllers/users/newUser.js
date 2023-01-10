@@ -10,6 +10,8 @@ const newUser = async (req, res, next) => {
       throw generateError("Faltan campos", 400);
     }
 
+    // Comprobar los datos que llegan desde fuera con el validator de JOI
+
     // Si no mandamos en el body el role, por defecto será normal. Para facilitar crear usuarios que no sean ni coachs ni admins
     if (!role) {
       role = "normal";

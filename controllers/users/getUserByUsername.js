@@ -1,24 +1,27 @@
-const selectUserByIdQuery = require("../../bbdd/queries/users/selectUserByIdQuery");
+const selectUserByUsernameQuery = require("../../bbdd/queries/users/selectUserByUsernameQuery");
 
-const getUser = async (req, res, next) => {
+const getUserByUsername = async (req, res, next) => {
   try {
-    const { idUser } = req.params;
+    const { username } = req.params;
 
     // Obtener información de un usuario.
-    const user = await selectUserByIdQuery(idUser);
+    const user = await selectUserByUsernameQuery(username);
 
     // Objeto con información básica del usuario.
     const userInfo = {
       username: user.username,
       avatar: user.avatar,
-      role: user.role,
       createdAt: user.createdAt,
     };
 
     // Si soy el dueño de ese usuario agrego más información.
-    if (Number(idUser) === req.user.id) {
+    if (username === req.user.username) {
       userInfo.email = user.email;
     }
+
+    if (user.role != "admin") {
+      userInfo.role = user.role;
+    } else userInfo.role = `coach`;
 
     res.send({
       status: "ok",
@@ -31,4 +34,4 @@ const getUser = async (req, res, next) => {
   }
 };
 
-module.exports = getUser;
+module.exports = getUserByUsername;

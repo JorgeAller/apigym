@@ -12,6 +12,7 @@ const main = async () => {
 
     console.log("Borrando tablas...");
 
+    await connection.query("DROP TABLE IF EXISTS likesRutines");
     await connection.query("DROP TABLE IF EXISTS favsRutines");
     await connection.query("DROP TABLE IF EXISTS rutines");
     await connection.query("DROP TABLE IF EXISTS exerciseMedia");
@@ -30,7 +31,10 @@ const main = async () => {
                 avatar VARCHAR(100),
                 role ENUM ('admin','coach', 'normal') DEFAULT 'normal',
                 createdAt TIMESTAMP NOT NULL,
-                modifiedAt TIMESTAMP
+                modified BOOLEAN DEFAULT 0,
+                modifiedAt TIMESTAMP,
+                deleted BOOLEAN DEFAULT 0,
+                deletedAt TIMESTAMP
           )
         `);
 
@@ -39,11 +43,10 @@ const main = async () => {
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 name VARCHAR(255) NOT NULL,
                 description TEXT NOT NULL,
-                photo VARCHAR(255) NOT NULL,
                 muscleGroup VARCHAR(255) NOT NULL,
                 idUser INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
-                createdAt TIMESTAMP NOT NULL,
+                createdAt TIMESTAMP NOT NULL, 
                 modifiedAt TIMESTAMP
           )
         `);
@@ -55,6 +58,7 @@ const main = async () => {
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 idExercise INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idExercise) REFERENCES exercises(id),
+                UNIQUE(idUser, idExercise),
                 createdAt TIMESTAMP NOT NULL
           )
         `);
@@ -62,7 +66,7 @@ const main = async () => {
     await connection.query(`
             CREATE TABLE IF NOT EXISTS exerciseMedia (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                name VARCHAR(100) NOT NULL,
+                nameMedia VARCHAR(100) NOT NULL,
                 idExercise INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idExercise) REFERENCES exercises(id),
                 createdAt TIMESTAMP NOT NULL,
@@ -73,12 +77,10 @@ const main = async () => {
             CREATE TABLE IF NOT EXISTS rutines (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 name VARCHAR(100) NOT NULL,
-                duration VARCHAR(100) NOT NULL,
-                description TEXT NOT NULL,
+                duration VARCHAR(100),
+                description TEXT NOT NULL, 
                 idUser INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
-                idExercise INT UNSIGNED NOT NULL,
-                FOREIGN KEY (idExercise) REFERENCES exercises(id),
                 createdAt TIMESTAMP NOT NULL,
                 modifiedAt TIMESTAMP
             )
@@ -86,13 +88,28 @@ const main = async () => {
     await connection.query(`
             CREATE TABLE IF NOT EXISTS favsRutines (
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                idRutine INT UNSIGNED NOT NULL,
+                FOREIGN KEY (idRutine) REFERENCES rutines(id),
+                idExercise INT UNSIGNED NOT NULL,
+                FOREIGN KEY (idExercise) REFERENCES exercises(id),
+                idUser INT UNSIGNED NOT NULL,
+                FOREIGN KEY (idUser) REFERENCES users(id),
+                createdAt TIMESTAMP NOT NULL,
+                modifiedAt TIMESTAMP
+            )
+        `);
+
+    await connection.query(`
+            CREATE TABLE IF NOT EXISTS likesRutines (
+                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 idUser INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idUser) REFERENCES users(id),
                 idRutine INT UNSIGNED NOT NULL,
                 FOREIGN KEY (idRutine) REFERENCES rutines(id),
+                UNIQUE(idUser, idRutine),
                 createdAt TIMESTAMP NOT NULL
-            )
-        `);
+      )
+    `);
 
     console.log("¡Tablas creadas!");
 

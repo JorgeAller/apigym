@@ -7,6 +7,19 @@ const { v4: uuid } = require("uuid");
 const { UPLOADS_DIR } = process.env;
 
 /**
+ * ##################
+ * ## Muscle Group ##
+ * ##################
+ */
+
+/* const getMuscleGroup = (muscleGroup) => {
+  const muscleGroupsString = process.env.MUSCLE_GROUPS;
+  const muscleGroups = JSON.parse(muscleGroupsString);
+  const hola = muscleGroup;
+  return muscleGroups.hola;
+}; */
+
+/**
  * ####################
  * ## Generate Error ##
  * ####################
@@ -91,8 +104,82 @@ const deletePhoto = async (imgName) => {
   }
 };
 
+/**
+ * ################
+ * ## Save File ##
+ * ################
+ */
+const saveFile = async (file) => {
+  // Ruta absoluta al directorio de subida de archivos.
+  const uploadsPath = path.join(__dirname, UPLOADS_DIR);
+
+  try {
+    // Intentamos acceder al directorio uploads.
+    await fs.access(uploadsPath);
+  } catch {
+    // Si no es posible acceder al directorio "access" lanzará un error.
+    // Por tanto, si entramos en el catch creamos el directorio.
+    await fs.mkdir(uploadsPath);
+  }
+
+  // Para poder redimensionar la imagen necesitamos crear un objeto Sharp a
+  // partir de la imagen dada.
+  const sharpMedia = sharp(file.data);
+
+  let fileName;
+
+  // Generamos un nombre aleatorio para el archivo.
+  if (file.mimetype.startsWith("image/")) {
+    fileName = `${uuid()}.jpg`;
+    sharpMedia.resize(500);
+  }
+
+  if (file.mimetype.startsWith("video/")) {
+    throw generateError(
+      "Estamos trabajando en ello. Aún no puedes subir un vídeo para tu ejercicio",
+      501
+    );
+    /* // Asume que el archivo de video se llama "video.mp4" y está en el directorio "videos"
+    const inputVideo = file.name;
+
+    // Si el archivo no es una imagen, no hacemos nada con él
+    fileName = `${uuid()}.${file.mimetype.split("/").pop()}`;
+    console.log("file", fileName);
+
+    // Asume que quieres guardar el video redimensionado en el directorio "videos" con el nombre "video_resized.mp4"
+    const outputVideo = path.join(__dirname, UPLOADS_DIR, fileName);
+
+    // Ejecuta ffmpeg para redimensionar el video a un ancho de 640px
+    exec(`ffmpeg -i ${inputVideo} -vf scale=500:-1 ${outputVideo}`, (error) => {
+      if (error) {
+        console.error(`Error al redimensionar el video: ${error}`);
+      } else {
+        console.log("Video redimensionado correctamente");
+      }
+    }); */
+  }
+
+  // Ruta absoluta al archivo.
+  const filePath = path.join(uploadsPath, fileName);
+
+  // Guardamos el archivo en la carpeta uploads.
+  await sharpMedia.toFile(filePath);
+
+  // Retornamos el nombre del archivo.
+  return fileName;
+};
+
+// Funcion para que los admins
+/* const isAdmin = async (idUser, idElement) => {
+  if (idUser.role === "admin") {
+    return (idUser.id = idElement.idUser);
+  }
+};
+*/
+
 module.exports = {
   generateError,
   savePhoto,
   deletePhoto,
+  saveFile,
 };

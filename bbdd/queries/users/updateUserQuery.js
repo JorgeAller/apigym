@@ -1,14 +1,14 @@
 const getConnection = require("../../getConnection");
 
-const updateUserQuery = async (email, avatar, idUser) => {
+const updateUserQuery = async (email, avatar, role, idUser) => {
   let connection;
 
   try {
     connection = await getConnection();
 
     await connection.query(
-      `UPDATE users SET email = ?, avatar = ?, modifiedAt = ? WHERE id = ?`,
-      [email, avatar, new Date(), idUser]
+      `UPDATE users SET email = ?, avatar = ?, role = ?, modified = 1, modifiedAt = ? WHERE id = ?`,
+      [email, avatar, role, new Date(), idUser]
     );
   } finally {
     if (connection) connection.release();

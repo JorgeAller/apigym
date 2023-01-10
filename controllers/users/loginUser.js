@@ -31,9 +31,11 @@ const loginUser = async (req, res, next) => {
     }
 
     // Objeto con los datos que queremos guardar en el token.
+    // Añadimos el username en el token, para poder comprobar a la hora de hacer busquedas por username
     const tokenInfo = {
       id: user.id,
       role: user.role,
+      username: user.username,
     };
 
     // Creamos el token.

@@ -1,0 +1,838 @@
+{
+	"info": {
+		"_postman_id": "2707e02a-7267-41e3-83e4-be9b88aa766c",
+		"name": "APIGYM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"normal3\",\n    \"email\": \"normal3@gmail.com\",\n    \"password\": \"123456\",\n    \"role\": \"normal\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User  by ID (Show more info For Owners)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/users/id/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users",
+								"id",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Username (Show more info For Owners) Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/users/name/coach1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users",
+								"name",
+								"coach1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jose2@gmail.com",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/E:/Descargas/logo93181656346365.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Own User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTY3MzM1MjI1MywiZXhwIjoxNjczOTU3MDUzfQ.ks9Lp4Ui_GklRcl8iQFw8UlJxPEDgfRFal-XW6Ry7X0",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "verifyName",
+									"value": "normal1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exercises",
+			"item": [
+				{
+					"name": "New Exercise",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/E:/Descargas/[5785]LOGO LEB PLATA.jpg"
+								},
+								{
+									"key": "name",
+									"value": "Ejercicio 4",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "Creado por el Coach 1",
+									"type": "default"
+								},
+								{
+									"key": "muscleGroup",
+									"value": "todo",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/exercises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Exercises (with filters)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{normal1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises"
+							],
+							"query": [
+								{
+									"key": "keywordDesc",
+									"value": "creado",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "muscleGroup",
+									"value": "espalda",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exercise by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_normal}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Exercise",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Ejercicio 1 Editado",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "A ver si va 2",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "muscleGroup",
+									"value": "Pechito",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/exercises/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Exercise",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like Exercises",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{normal1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises/9/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"9",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Like Exercise",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{normal1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises/1/likes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"1",
+								"likes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Exercise to Rutine (Add Fav)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/exercises/4/rutines/2/favorites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"4",
+								"rutines",
+								"2",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Exercise From Rutine (Delete Fav)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:4000/exercises/6/rutines/2/favorites/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"exercises",
+								"6",
+								"rutines",
+								"2",
+								"favorites",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rutines",
+			"item": [
+				{
+					"name": "New Rutine",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Rutina 2",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "Creada por Coach2",
+									"type": "default"
+								},
+								{
+									"key": "duration",
+									"value": "20",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/rutines",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rutine by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{normal2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Rutines (with filters)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach1}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines?keywordDesc=coach",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines"
+							],
+							"query": [
+								{
+									"key": "keywordDesc",
+									"value": "coach"
+								},
+								{
+									"key": "duration",
+									"value": "40",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like Rutine",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines/11/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								"11",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Like Rutine",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines/1/likes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								"1",
+								"likes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Rutine",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{normal1}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Rutina 6",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "AL FIN",
+									"type": "default",
+									"disabled": true
+								},
+								{
+									"key": "duration",
+									"value": "20",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/rutines/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Rutine",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "coach1",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "coach2",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "coach3",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "normal1",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "normal2",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "normal3",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
