@@ -585,32 +585,6 @@
 					"response": []
 				},
 				{
-					"name": "Get Rutine by ID",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{normal2}}",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:4000/rutines/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"rutines",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "List Rutines (with filters)",
 					"request": {
 						"method": "GET",
@@ -652,18 +626,18 @@
 					"response": []
 				},
 				{
-					"name": "Like Rutine",
+					"name": "Get Rutine by ID",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "{{coach2}}",
+								"value": "{{normal2}}",
 								"type": "default"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:4000/rutines/11/likes",
+							"raw": "http://localhost:4000/rutines/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -671,35 +645,6 @@
 							"port": "4000",
 							"path": [
 								"rutines",
-								"11",
-								"likes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Like Rutine",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{coach2}}",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:4000/rutines/1/likes/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"rutines",
-								"1",
-								"likes",
 								""
 							]
 						}
@@ -775,6 +720,61 @@
 							"path": [
 								"rutines",
 								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like Rutine",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines/11/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								"11",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Like Rutine",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{coach2}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/rutines/1/likes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rutines",
+								"1",
+								"likes",
+								""
 							]
 						}
 					},
