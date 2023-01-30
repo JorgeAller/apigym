@@ -8,23 +8,23 @@ const { generateError } = require("../../helpers");
 
 const loginUser = async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { user, password } = req.body;
 
-    let user;
+    let foundUser;
 
-    if ((!email && !username) || !password) {
+    if (!user || !password) {
       throw generateError("Faltan campos", 400);
     }
 
-    if (username) {
-      user = await selectUserByUsernameQuery(username);
-    }
-    if (email) {
-      user = await selectUserByEmailQuery(email);
+    if (user.email) {
+      foundUser = await selectUserByEmailQuery(user.email);
+      console.log("adios", foundUser);
+    } else {
+      foundUser = await selectUserByUsernameQuery(user.username);
     }
 
     // Comprobamos si la contraseña es válida.
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcrypt.compare(password, foundUser.password);
 
     if (!validPassword) {
       throw generateError("Constraseña incorrecta", 401);
@@ -33,9 +33,9 @@ const loginUser = async (req, res, next) => {
     // Objeto con los datos que queremos guardar en el token.
     // Añadimos el username en el token, para poder comprobar a la hora de hacer busquedas por username
     const tokenInfo = {
-      id: user.id,
-      role: user.role,
-      username: user.username,
+      id: foundUser.id,
+      role: foundUser.role,
+      username: foundUser.username,
     };
 
     // Creamos el token.

@@ -120,8 +120,7 @@ app.post(
   isAuth,
   exerciseExists,
   rutineExists,
-  addExerciseToRutine,
-  deleteExerciseFromRutine
+  addExerciseToRutine
 );
 
 // Eliminar un ejercicio de una rutina (quitar el fav). Pasamos el id del Fav (:idFav) que queremos eliminar,

@@ -23,6 +23,15 @@ const newUser = async (req, res, next) => {
     res.send({
       status: "ok",
       message: "Usuario creado",
+      data: {
+        User: {
+          username,
+          email,
+          password,
+          role,
+          createdAt: new Date(),
+        },
+      },
     });
   } catch (err) {
     next(err);
