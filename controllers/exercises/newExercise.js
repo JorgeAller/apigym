@@ -27,20 +27,22 @@ const newExercise = async (req, res, next) => {
     );
 
     let media;
-
     if (!req.files?.media) {
       throw generateError("Faltan campos", 400);
-    } else {
-      media = await saveFile(req.files.media);
     }
 
-    await insertMediaQuery(media, idExercise);
+    if (req.files.media) {
+      media = await saveFile(req.files.media);
+
+      await insertMediaQuery(media, idExercise);
+    }
 
     res.send({
       status: "ok",
       data: {
         Exercise: {
           id: idExercise,
+          hole: req.files.media,
           name,
           description,
           muscleGroup,
