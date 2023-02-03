@@ -19,20 +19,22 @@ const selectExerciseByIdQuery = async (idUser, idExercise) => {
                   COUNT(L.id) AS likes, 
                   BIT_OR(L.idUser = ?) AS likedByMe, 
                   E.idUser = ? AS owner, 
-                  E.createdAt
+                  E.createdAt,
+                  M.nameMedia
                 FROM Exercises E
                 LEFT JOIN likesExercises L ON E.id = L.idExercise
-                WHERE E.id = ?
+                LEFT JOIN exerciseMedia M ON E.id = M.idExercise
+                WHERE M.idExercise = ? AND E.id = ?
                 GROUP BY E.id
                 ORDER BY E.createdAt DESC
             `,
-      [idUser, idUser, idExercise]
+      [idUser, idUser, idExercise, idExercise]
     );
 
-    const [media] = await connection.query(
-      `SELECT id, nameMedia FROM exerciseMedia WHERE idExercise = ?`,
-      [idExercise]
-    );
+    // const [media] = await connection.query(
+    //   `SELECT id, nameMedia FROM exerciseMedia WHERE idExercise = ?`,
+    //   [idExercise]
+    // );
 
     if (exercises.length < 1) {
       throw generateError("No se ha encontrado ningun ejercicio", 404);
@@ -40,7 +42,6 @@ const selectExerciseByIdQuery = async (idUser, idExercise) => {
 
     return {
       ...exercises[0],
-      media,
     };
   } finally {
     if (connection) connection.release();

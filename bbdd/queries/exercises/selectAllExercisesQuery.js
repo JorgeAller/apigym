@@ -26,9 +26,11 @@ const selectAllExercisesQuery = async (
                   COUNT(L.id) AS likes, 
                   BIT_OR(L.idUser = ?) AS likedByMe, 
                   E.idUser = ? AS owner, 
-                  E.createdAt
+                  E.createdAt,
+                  M.nameMedia
                 FROM Exercises E
                 LEFT JOIN likesExercises L ON E.id = L.idExercise
+                LEFT JOIN exerciseMedia M ON E.id = M.idExercise
                 WHERE E.name LIKE ?
                 AND E.description LIKE ?
                 AND E.muscleGroup LIKE ?
