@@ -1,3 +1,5 @@
+// UTILIZAMOS QUERY DE DAR LIKE PARA ELIMINAR EL LIKE SI ES EXISTENTE
+
 const getConnection = require("../../getConnection");
 
 const { generateError } = require("../../../helpers");

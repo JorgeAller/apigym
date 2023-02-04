@@ -1,3 +1,5 @@
+// UTILIZAMOS QUERY DE DAR LIKE PARA ELIMINAR EL LIKE SI ES EXISTENTE
+
 const deleteLikeQuery = require("../../bbdd/queries/exercises/deleteLikeQuery");
 const selectExerciseByIdQuery = require("../../bbdd/queries/exercises/selectExerciseByIdQuery");
 const selectUserByIdQuery = require("../../bbdd/queries/users/selectUserByIdQuery");

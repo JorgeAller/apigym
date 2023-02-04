@@ -15,10 +15,12 @@ const insertLikeQuery = async (idUser, idExercise) => {
     );
 
     if (likes.length > 0) {
-      throw generateError(
-        "No puedes dar like dos veces al mismo ejercicio",
-        403
+      await connection.query(
+        `DELETE FROM likesexercises WHERE idUser = ? AND idExercise = ?`,
+        [idUser, idExercise]
       );
+      const msg = "eliminado";
+      return msg;
     }
 
     await connection.query(
