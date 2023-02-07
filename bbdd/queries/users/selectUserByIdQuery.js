@@ -9,7 +9,20 @@ const selectUserByIdQuery = async (idUser) => {
     connection = await getConnection();
 
     const [users] = await connection.query(
-      `SELECT id, username, password, email, avatar, role, createdAt FROM users WHERE id = ?`,
+      `
+        SELECT 
+          U.id, 
+          U.username, 
+          U.password,
+          U.email, 
+          U.avatar, 
+          U.role, 
+          COUNT(E.id) AS exercises, 
+          U.createdAt 
+        FROM users U
+       LEFT JOIN Exercises E ON U.id = E.idUser
+        WHERE U.id = ?
+        GROUP BY U.id`,
       [idUser]
     );
 

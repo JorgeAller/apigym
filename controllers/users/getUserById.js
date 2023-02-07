@@ -12,6 +12,7 @@ const getUserById = async (req, res, next) => {
       username: user.username,
       avatar: user.avatar,
       role: user.role,
+      exercises: user.exercises,
       createdAt: user.createdAt,
     };
 
