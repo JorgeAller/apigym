@@ -9,7 +9,7 @@ const selectAllRutinesQuery = async (idUser, name, keywordDesc, duration) => {
 
   try {
     connection = await getConnection();
-    console.log(idUser);
+
     const [rutines] = await connection.query(
       `
                 SELECT 

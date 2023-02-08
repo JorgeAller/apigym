@@ -8,8 +8,7 @@ const newFav = async (req, res, next) => {
   try {
     const { idExercise, idRutine } = req.params;
     const rutine = await selectRutineByIdQuery(req.user.id, idRutine);
-    console.log(rutine);
-    console.log(req.user.id);
+
     if (rutine.idUser != req.user.id) {
       throw generateError(
         "No puedes añadir ejercicios a rutinas que no hayas creado. No tienes suficientes permisos",

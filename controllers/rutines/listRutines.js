@@ -31,7 +31,7 @@ const listRutines = async (req, res, next) => {
         },
       });
     }
-    console.log(rutines);
+
     res.send({
       status: "ok",
       message: `Aquí tienes todas las rutinas. Hay un total de ${

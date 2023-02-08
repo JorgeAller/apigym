@@ -15,8 +15,6 @@ const insertExerciseQuery = async (name, description, muscleGroup, idUser) => {
       [name, description, muscleGroup, idUser, new Date()]
     );
 
-    console.log(newExercise);
-
     // Retornamos el id que le ha asignado la base de datos a este nuevo ejercicio
     return newExercise.insertId;
   } finally {

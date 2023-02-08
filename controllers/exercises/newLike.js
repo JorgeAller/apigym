@@ -7,10 +7,9 @@ const newLike = async (req, res, next) => {
 
     // Insertamos el like.
     const msg = await insertLikeQuery(req.user.id, idExercise);
-    console.log(msg);
 
     const exercise = await selectExerciseByIdQuery(req.user.id, idExercise);
-    console.log(exercise);
+
     if (msg === "eliminado") {
       res.send({
         status: "ok",

@@ -18,7 +18,6 @@ const loginUser = async (req, res, next) => {
 
     if (user.email) {
       foundUser = await selectUserByEmailQuery(user.email);
-      console.log("adios", foundUser);
     } else {
       foundUser = await selectUserByUsernameQuery(user.username);
     }

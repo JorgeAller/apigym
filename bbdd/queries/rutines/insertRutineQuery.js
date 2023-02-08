@@ -15,8 +15,6 @@ const insertRutineQuery = async (name, description, duration, idUser) => {
       [name, description, duration, idUser, new Date()]
     );
 
-    console.log(newRutine);
-
     // Retornamos el id que le ha asignado la base de datos a este nuevo ejercicio
     return newRutine.insertId;
   } finally {
