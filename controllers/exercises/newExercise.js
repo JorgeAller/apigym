@@ -42,7 +42,7 @@ const newExercise = async (req, res, next) => {
       data: {
         Exercise: {
           id: idExercise,
-          hole: req.files.media,
+
           name,
           description,
           muscleGroup,

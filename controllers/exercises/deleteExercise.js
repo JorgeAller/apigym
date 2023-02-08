@@ -1,6 +1,7 @@
 const deleteExerciseQuery = require("../../bbdd/queries/exercises/deleteExerciseQuery");
 const selectExerciseByIdQuery = require("../../bbdd/queries/exercises/selectExerciseByIdQuery");
 const selectUserByIdQuery = require("../../bbdd/queries/users/selectUserByIdQuery");
+const selectAllExercisesQuery = require("../../bbdd/queries/exercises/selectAllExercisesQuery");
 
 const { generateError } = require("../../helpers");
 
@@ -35,9 +36,21 @@ const deleteExercise = async (req, res, next) => {
     // Eliminamos el ejercicio
     await deleteExerciseQuery(req.user.id, idExercise);
 
+    const name = "";
+    const keywordDesc = "";
+    const muscleGroup = "";
+    const exercises = await selectAllExercisesQuery(
+      req.user?.id,
+      name,
+      keywordDesc,
+      muscleGroup
+    );
+
+    console.log(exercises);
     res.send({
       status: "ok",
       message: "Ejercicio eliminado",
+      data: exercises,
     });
   } catch (err) {
     next(err);

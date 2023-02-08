@@ -25,14 +25,17 @@ const editUser = async (req, res, next) => {
 
       avatar = await savePhoto(req.files.avatar);
     }
-    if (role === user.role && email === user.email && avatar === user.avatar) {
+    if (role === user.role && email === user.email) {
       throw generateError("No has realizado ningún cambio. Faltan campos", 400);
     }
+    console.log(email);
+    console.log(user.email);
 
     email = email || user.email;
     avatar = avatar || user.avatar;
     role = role || user.role;
 
+    console.log(email);
     // Actualizamos el avatar del usuario en la base de datos.
     await updateUserQuery(email, avatar, role, req.user.id);
     if (email != user.email && avatar != user.avatar) {
