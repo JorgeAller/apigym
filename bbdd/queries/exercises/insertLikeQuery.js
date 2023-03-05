@@ -1,7 +1,5 @@
 const getConnection = require("../../getConnection");
 
-const { generateError } = require("../../../helpers");
-
 const insertLikeQuery = async (idUser, idExercise) => {
   let connection;
 

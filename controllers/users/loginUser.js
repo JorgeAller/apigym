@@ -33,7 +33,7 @@ const loginUser = async (req, res, next) => {
     // Añadimos el username en el token, para poder comprobar a la hora de hacer busquedas por username
     const tokenInfo = {
       id: foundUser.id,
-      role: foundUser.role,
+
       username: foundUser.username,
     };
 

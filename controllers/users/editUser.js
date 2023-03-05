@@ -25,43 +25,41 @@ const editUser = async (req, res, next) => {
 
       avatar = await savePhoto(req.files.avatar);
     }
-    if (role === user.role && email === user.email) {
+    if (role === user.role && email === user.email && avatar === user.avatar) {
       throw generateError("No has realizado ningún cambio. Faltan campos", 400);
     }
-    console.log(email);
-    console.log(user.email);
 
     email = email || user.email;
     avatar = avatar || user.avatar;
     role = role || user.role;
 
-    console.log(email);
     // Actualizamos el avatar del usuario en la base de datos.
-    await updateUserQuery(email, avatar, role, req.user.id);
+    const updatedUser = await updateUserQuery(email, avatar, role, req.user.id);
+
     if (email != user.email && avatar != user.avatar) {
       res.send({
         status: "ok",
         message:
           "Usuario actualizado. Se han cambiado el avatar y el mail con éxito",
-        data: { email, avatar },
+        data: { updatedUser, email, avatar },
       });
     } else if (email != user.email) {
       res.send({
         status: "ok",
         message: "Usuario actualizado. Se ha cambiado el mail con éxito",
-        data: { email },
+        data: { updatedUser, email },
       });
     } else if (avatar != user.avatar) {
       res.send({
         status: "ok",
         message: "Usuario actualizado. Se ha cambiado el avatar con éxito",
-        data: { avatar },
+        data: { updatedUser, avatar },
       });
     } else if (role != user.role) {
       res.send({
         status: "ok",
         message: "Usuario actualizado. Se ha cambiado el role con éxito",
-        data: { role },
+        data: { updatedUser, role },
       });
     }
   } catch (err) {

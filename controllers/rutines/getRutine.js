@@ -5,6 +5,7 @@ const getRutine = async (req, res, next) => {
     const { idRutine } = req.params;
 
     const rutine = await selectRutineByIdQuery(req.user?.id, idRutine);
+    console.log("pepitp", rutine);
 
     res.send({
       status: "ok",

@@ -1,8 +1,5 @@
 const getConnection = require("../../getConnection");
 
-const { generateError } = require("../../../helpers");
-const selectRutineByIdQuery = require("./selectRutineByIdQuery");
-
 const insertLikeQuery = async (idUser, idRutine) => {
   let connection;
 
@@ -16,10 +13,12 @@ const insertLikeQuery = async (idUser, idRutine) => {
     );
 
     if (likes.length > 0) {
-      throw generateError(
-        "No puedes dar like dos veces a la misma rutina",
-        403
+      await connection.query(
+        `DELETE FROM likesRutines WHERE idUser = ? AND idRutine = ?`,
+        [idUser, idRutine]
       );
+      const msg = "eliminado";
+      return msg;
     }
 
     await connection.query(

@@ -8,11 +8,7 @@ const deleteRutineQuery = async (idRutine) => {
   try {
     connection = await getConnection();
 
-    // Seleccionamos ejercicio.
-    const [rutines] = await connection.query(
-      `SELECT id FROM rutines WHERE id = ?`,
-      [idRutine]
-    );
+    await connection.query(`SELECT id FROM rutines WHERE id = ?`, [idRutine]);
 
     // Borramos todos los likes relacionados con la rutina que queremos eliminar
     await connection.query(`DELETE FROM likesrutines WHERE idRutine = ?`, [

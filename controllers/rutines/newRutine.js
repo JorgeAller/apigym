@@ -1,4 +1,5 @@
 const insertRutineQuery = require("../../bbdd/queries/rutines/insertRutineQuery");
+const selectAllRutinesQuery = require("../../bbdd/queries/rutines/selectAllRutinesQuery");
 
 const { generateError } = require("../../helpers");
 
@@ -20,6 +21,7 @@ const newRutine = async (req, res, next) => {
       duration,
       req.user.id
     );
+    const rutines = await selectAllRutinesQuery(req.user.id);
 
     res.send({
       status: "ok",
@@ -33,6 +35,7 @@ const newRutine = async (req, res, next) => {
           username: req.user.username,
           createdAt: new Date(),
         },
+        rutines,
       },
     });
   } catch (err) {

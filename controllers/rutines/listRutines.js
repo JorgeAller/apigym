@@ -10,6 +10,12 @@ const listRutines = async (req, res, next) => {
       keywordDesc,
       duration
     );
+    rutines.forEach((rutine) => {
+      if (rutine.favsRutinesIds) {
+        rutine.favsRutinesIds = rutine.favsRutinesIds.split(",");
+      } else rutine.favsRutinesIds = "0";
+    });
+
     if (keywordDesc || name || duration) {
       if (rutines.length < 1) {
         res.send({
