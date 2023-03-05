@@ -65,9 +65,9 @@ Pueden ver la landing page de la plataforma donde podrán registrarse, hacer log
 
 - Copia el archivo `.env.example` y pega su contenido en un archivo `.env` y cubre los datos necesarios con tus datos privados.
 
-- Ejecuta en el terminal el comando `npm i -y` para instalar todas las dependencias necesarias del proyecto.
+- Ejecuta en el terminal el comando `npm i ` para instalar todas las dependencias necesarias del proyecto.
 
-- Ejecutar `npm run bbdd/initDB.js` para crear las tablas necesarias en la base de datos anteriormente creada y añadir un usario administrador.
+- Ejecutar `node bbdd/initDB.js` para crear las tablas necesarias en la base de datos anteriormente creada y añadir un usario administrador.
 
 - Ejecutar `npm run dev` o `npm start` para lanzar el servidor.
 
